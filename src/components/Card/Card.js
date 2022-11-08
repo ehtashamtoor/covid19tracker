@@ -15,12 +15,9 @@ const CardBox = () => {
                 <Typography variant="h5" component="div">
                     98400
                 </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    adjective
-                </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small">Learn More</Button>
+                <Button size="small">See more</Button>
             </CardActions>
         </Card>
     );

@@ -3,11 +3,16 @@
 .CardWrapper{
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .queryWrapper{
     display: flex;
     justify-content: center;
+}
+
+.select{
+    width: 45%;
 }
 .findBtn{
     margin: 0 5px !important;

@@ -1,61 +1,86 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import CardBox from './components/Card/Card';
 import Navbar from './components/navbar/Navbar';
-import Chart from './components/Chart/Chart';
+// import Chart from './components/Chart/Chart';
+import Select from 'react-select'
 
 import { Button } from '@mui/material';
-import TextField from '@mui/material/TextField';
 
 
 
 function App() {
-  const [chartData, setChartData] = useState({
-    labels: ['Loading'],
-    datasets: [
-      {
-        label: "Price in USD",
-        data: ['Loading'],
-        backgroundColor: [
-          "#ffbb11",
-          "#ecf0f1",
-          "#50AF85",
-          "#f3ba2f",
-          "#2a71d0"
-        ]
-      }
-    ]
-  });
+  // const [chartData, setChartData] = useState({
+  //   labels: ['Loading'],
+  //   datasets: [
+  //     {
+  //       label: "deaths",
+  //       data: ['Loading'],
+  //       backgroundColor: [
+  //         "#ffbb11",
+  //         "#ecf0f1",
+  //         "#50AF85",
+  //         "#f3ba2f",
+  //         "#2a71d0"
+  //       ]
+  //     }
+  //   ]
+  // });
+  const [countriesData, setCountriesData] = useState([]);
+  const [countries, setCountries] = useState([]);
+
+  const options = []
 
 
-  useEffect(() => {
-    const getPrices = async () => {
-      const prices_result = await fetch("https://api.coincap.io/v2/assets/?limit=5")
+  useLayoutEffect(() => {
+    async function getData() {
+      const axios = require("axios");
 
-      let data = await prices_result.json();
+      const options = {
+        method: 'GET',
+        url: 'https://covid-193.p.rapidapi.com/statistics',
+        headers: {
+          'X-RapidAPI-Key': '6716fd4971msh5f1ad7b5ba87dd6p136f49jsnb152367a48eb',
+          'X-RapidAPI-Host': 'covid-193.p.rapidapi.com'
+        }
+      };
+      console.log("Loading data")
 
-      var labelData = data.data.map(crypto => crypto.name)
-      var pricesData = data.data.map(crypto => crypto.priceUsd)
+      await axios.request(options).then((response) => {
 
-      setChartData({
-        labels: labelData,
-        datasets: [
-          {
-            label: "Price in USD",
-            data: pricesData,
-            backgroundColor: [
-              "#ffbb11",
-              "#ecf0f1",
-              "#50AF85",
-              "#f3ba2f",
-              "#2a71d0"
-            ]
-          }
-        ]
-      })
+        response.data.response.map((countryObj) => {
+
+          countriesData.push(countryObj)
+          countries.push(countryObj.country)
+
+          return 1;
+        })
+
+        setCountriesData([...countriesData]);
+        setCountries([...countries])
+        console.log("Data loaded up");
+
+      }).catch((error) => {
+        console.error(error);
+      });
     }
-    getPrices()
+    getData()
+    console.log(countries);
+    console.log(countriesData);
+
   }, [])
+
+
+  countries.forEach((name) => {
+    options.push({
+      value: name, label: name,
+    })
+  })
+
+
+
+
+
   return (
     <div>
       <Navbar />
@@ -66,13 +91,46 @@ function App() {
       </div>
 
       <div className='queryWrapper'>
-        <TextField label="Search Country" variant="outlined" sx={{width: 500, boxShadow: 1}}/>
+        <Select options={options} className='select'/>
         <Button variant="contained" className='findBtn'>Find</Button>
       </div>
 
-      <Chart chartData={chartData} />
+      {/* <Chart chartData={chartData} /> */}
     </div>
   );
 }
 
 export default App;
+
+
+
+
+
+
+
+// const getPrices = async () => {
+//   const prices_result = await fetch("https://api.coincap.io/v2/assets/?limit=5")
+
+//   let data = await prices_result.json();
+
+//   var labelData = data.data.map(crypto => crypto.name)
+//   var pricesData = data.data.map(crypto => crypto.priceUsd)
+
+//   setChartData({
+//     labels: labelData,
+//     datasets: [
+//       {
+//         label: "Price in USD",
+//         data: pricesData,
+//         backgroundColor: [
+//           "#ffbb11",
+//           "#ecf0f1",
+//           "#50AF85",
+//           "#f3ba2f",
+//           "#2a71d0"
+//         ]
+//       }
+//     ]
+//   })
+// }
+// getPrices()
