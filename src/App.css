@@ -1,0 +1,14 @@
+
+
+.CardWrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.queryWrapper{
+    display: flex;
+    justify-content: center;
+}
+.findBtn{
+    margin: 0 5px !important;
+}
