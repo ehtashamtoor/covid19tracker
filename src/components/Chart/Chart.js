@@ -1,4 +1,5 @@
 import React from "react";
+// import './chart.css'
 import 'chart.js/auto';
 import { Chart } from 'react-chartjs-2';
 import { Chart as ChartJS, LineController, LineElement, PointElement, LinearScale, Title } from 'chart.js';
@@ -7,7 +8,6 @@ ChartJS.register(LineController, LineElement, PointElement, LinearScale, Title);
 
 const Chartt = ({ chartData }) => {
     return (
-        <div style={{ height: "300px", width: "600px", margin:'auto' }}>
             <Chart
                 type='bar'
                 data={chartData}
@@ -15,16 +15,15 @@ const Chartt = ({ chartData }) => {
                     plugins: {
                         title: {
                             display: true,
-                            text: "CryptoCurrency Prices"
+                            text: "Country"
                         },
                         legend: {
                             display: true,
                             position: "top",
-                        }
+                        },
                     }
                 }}
             />
-        </div>
     )
 }
 

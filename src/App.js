@@ -8,19 +8,23 @@ import Select from 'react-select'
 
 function App() {
   const [chartData, setChartData] = useState({
-    labels: ['Loading'],
+    labels: ['Case Details'],
     datasets: [
       {
-        label: "deaths",
-        data: ['Loading'],
-        backgroundColor: [
-          "#ffbb11",
-          "#ecf0f1",
-          "#50AF85",
-          "#f3ba2f",
-          "#2a71d0"
-        ]
-      }
+        label: 'total',
+        data: [638610555],
+        backgroundColor: ["#fdbb12", "#25ff11", "#ff1129"]
+      },
+      {
+        label: 'recovered',
+        data: [618385160],
+        backgroundColor: ["#25ff11"]
+      },
+      {
+        label: 'deaths',
+        data: [6608627],
+        backgroundColor: ["#ff1129"]
+      },
     ]
   });
   const [countriesData, setCountriesData] = useState([]);
@@ -90,14 +94,39 @@ function App() {
       if (selectedCountry === countryObj.country) {
         selCountryObj = countriesData[index];
         setSelCountryObj(selCountryObj);
-        console.log(selCountryObj.cases.total)
+        // console.log(selCountryObj.cases.total)
         return 1;
       }
     })
     // setting values of total, recoevered and death cases
-      setTotalCases(selCountryObj.cases.total)
-      setRecovered(selCountryObj.cases.recovered)
-      setDeaths(selCountryObj.deaths.total)
+    totalCases = selCountryObj.cases.total;
+    setTotalCases(totalCases)
+    recovered = selCountryObj.cases.recovered;
+    setRecovered(recovered)
+    deaths = selCountryObj.deaths.total;
+    setDeaths(deaths)
+
+    // setting case details into the chartData
+    setChartData({
+      labels: ['Case Details'],
+      datasets: [
+        {
+          label: 'total',
+          data: [totalCases],
+          backgroundColor: ["#fdbb12", "#25ff11", "#ff1129"]
+        },
+        {
+          label: 'recovered',
+          data: [recovered],
+          backgroundColor: ["#25ff11"]
+        },
+        {
+          label: 'deaths',
+          data: [deaths],
+          backgroundColor: ["#ff1129"]
+        },
+      ]
+    })
   }
 
   return (
@@ -114,7 +143,10 @@ function App() {
         <Select options={options} value={{ label: selectedCountry }} onChange={getCountry} className='select' placeholder={<div>Type to search</div>} />
       </div>
 
-      <Chart chartData={chartData} />
+      <div className='chart'>
+        <Chart chartData={chartData} />
+
+      </div>
     </div>
   );
 }
