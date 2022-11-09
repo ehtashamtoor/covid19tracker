@@ -1,12 +1,9 @@
 import './App.css';
-import { useState, useLayoutEffect } from 'react';
+import { useState, useEffect } from 'react';
 import CardBox from './components/Card/Card';
 import Navbar from './components/navbar/Navbar';
 // import Chart from './components/Chart/Chart';
 import Select from 'react-select'
-
-import { Button } from '@mui/material';
-
 
 
 function App() {
@@ -28,11 +25,12 @@ function App() {
   // });
   const [countriesData, setCountriesData] = useState([]);
   const [countries, setCountries] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState('');
+  let [selCountryObj, setSelCountryObj] = useState("");
 
   const options = []
 
-
-  useLayoutEffect(() => {
+  useEffect(() => {
     async function getData() {
       const axios = require("axios");
 
@@ -65,12 +63,10 @@ function App() {
       });
     }
     getData()
-    console.log(countries);
-    console.log(countriesData);
 
   }, [])
 
-
+  // displaying all countries into react-select
   countries.forEach((name) => {
     options.push({
       value: name, label: name,
@@ -78,21 +74,32 @@ function App() {
   })
 
 
+  // getting value of react-select
+  const getCountry = (obj) => {
 
+    setSelectedCountry(obj.value);
 
+    // finding the selected Country obj from countries data by using map
+    countriesData.map((countryObj, index) => {
+      if (obj.value === countryObj.country) {
+        setSelCountryObj(countriesData[index]);
+      }
+      return 1;
+    })
+
+  }
 
   return (
     <div>
       <Navbar />
       <div className='CardWrapper'>
-        <CardBox />
-        <CardBox />
-        <CardBox />
+        <CardBox TitleType={'Total Cases'} CaseDetails={selCountryObj.cases.total} />
+        <CardBox TitleType={'Total Recovered'} CaseDetails={selCountryObj.cases.recovered} />
+        <CardBox TitleType={'Total Deaths'} CaseDetails={selCountryObj.deaths.total} />
       </div>
 
       <div className='queryWrapper'>
-        <Select options={options} className='select'/>
-        <Button variant="contained" className='findBtn'>Find</Button>
+        <Select options={options} value={{ label: selectedCountry }} onChange={getCountry} className='select' />
       </div>
 
       {/* <Chart chartData={chartData} /> */}
@@ -101,36 +108,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-
-
-
-// const getPrices = async () => {
-//   const prices_result = await fetch("https://api.coincap.io/v2/assets/?limit=5")
-
-//   let data = await prices_result.json();
-
-//   var labelData = data.data.map(crypto => crypto.name)
-//   var pricesData = data.data.map(crypto => crypto.priceUsd)
-
-//   setChartData({
-//     labels: labelData,
-//     datasets: [
-//       {
-//         label: "Price in USD",
-//         data: pricesData,
-//         backgroundColor: [
-//           "#ffbb11",
-//           "#ecf0f1",
-//           "#50AF85",
-//           "#f3ba2f",
-//           "#2a71d0"
-//         ]
-//       }
-//     ]
-//   })
-// }
-// getPrices()

@@ -5,15 +5,16 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-const CardBox = () => {
+const CardBox = ({ CaseDetails, TitleType }) => {
+
     return (
-        <Card sx={{ minWidth: 275, width: 275, m:2, boxShadow: 3}}>
+        <Card sx={{ width: 350, m: 2, boxShadow: 3 }}>
             <CardContent>
-                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                    Total Deaths
+                <Typography color="text.secondary" gutterBottom>
+                    {TitleType}
                 </Typography>
-                <Typography variant="h5" component="div">
-                    98400
+                <Typography variant="h4" component="div">
+                    {CaseDetails}
                 </Typography>
             </CardContent>
             <CardActions>
