@@ -113,7 +113,7 @@ function App() {
         {
           label: 'total',
           data: [totalCases],
-          backgroundColor: ["#fdbb12", "#25ff11", "#ff1129"]
+          backgroundColor: ["#fdbb12",]
         },
         {
           label: 'recovered',
@@ -130,17 +130,17 @@ function App() {
   }
 
   return (
-    <div>
-      <Navbar />
+    <div  className='App'>
+      <Navbar selectedCountry={selectedCountry}/>
       <div className='CardWrapper'>
 
-        <CardBox TitleType={'Total Cases'} CaseDetails={totalCases || 638610555} />
-        <CardBox TitleType={'Total Recovered'} CaseDetails={recovered || 618385160} />
-        <CardBox TitleType={'Total Deaths'} CaseDetails={deaths || 6608627} />
+        <CardBox TitleType={'Total Cases'} CaseDetails={totalCases || 638610555} style="BgYellow"/>
+        <CardBox TitleType={'Total Recovered'} CaseDetails={recovered || 618385160} style="BgGreen"/>
+        <CardBox TitleType={'Total Deaths'} CaseDetails={deaths || 6608627} style="BgRed"/>
       </div>
 
       <div className='queryWrapper'>
-        <Select options={options} value={{ label: selectedCountry }} onChange={getCountry} className='select' placeholder={<div>Type to search</div>} />
+        <Select options={options} value={{label: selectedCountry }} onChange={getCountry} className='select' placeholder={<div>Choose Country</div>}/>
       </div>
 
       <div className='chart'>

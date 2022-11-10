@@ -1,11 +1,34 @@
 
-
+/* Card component */
 .CardWrapper{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
 
+#card{
+    font-weight: bold !important;
+}
+
+#titleType{
+    border-bottom: 3px solid white;
+    text-shadow: 1px 1px 1px rgb(171, 30, 30), 0 0 0 rgb(166, 170, 63), 0 0 0.1em white;
+    font-size: large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#numbers{
+    font-style: italic;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.BgYellow{
+    background: #fdbb12 !important;
+}
+.BgGreen{
+    background: #25ff11 !important;
+}
+.BgRed{
+    background: #ff1129 !important;
+}
 .queryWrapper{
     display: flex;
     justify-content: center;
@@ -14,10 +37,9 @@
 .select{
     width: 45%;
 }
-.findBtn{
-    margin: 0 5px !important;
-}
 
+
+/* Chart Component */
 .chart {
     height: 70vh;
     width: 70vw;
@@ -25,7 +47,7 @@
 }
 
 
-
+/*Custom Media Queries */
 @media screen and (max-width: 450px) {
     .chart{
         height: 120vh;

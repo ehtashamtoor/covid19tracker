@@ -7,6 +7,7 @@ import { Chart as ChartJS, LineController, LineElement, PointElement, LinearScal
 ChartJS.register(LineController, LineElement, PointElement, LinearScale, Title);
 
 const Chartt = ({ chartData }) => {
+    
     return (
             <Chart
                 type='bar'
@@ -15,7 +16,8 @@ const Chartt = ({ chartData }) => {
                     plugins: {
                         title: {
                             display: true,
-                            text: "Country"
+                            text: "Corona Cases Graphical Representation",
+                            
                         },
                         legend: {
                             display: true,
