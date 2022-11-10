@@ -53,10 +53,16 @@
         height: 120vh;
         width: 120vw;
     }
+    #HopOn{
+        display: none !important;
+    }
 }   
 @media screen and (max-width: 600px) {
     .chart{
         height: 90vh;
         width: 90vw;
+    }
+    #HopOn{
+        display: none !important;
     }
 }   
