@@ -16,7 +16,7 @@ const Navbar = ({ selectedCountry }) => {
                         {selectedCountry || "World"}
                     </Typography>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 0 }} id='HopOn'>
-                        Looking for Corona Cases? Hop On🤍
+                        Looking for Corona Cases? Hop On🤍💛
                     </Typography>
                 </Toolbar>
             </AppBar>
