@@ -101,15 +101,12 @@ function App() {
     })
     // setting values of total, recoevered and death cases
     totalCases = selCountryObj.cases.total;
-    // totalCases = totalCases.toLocaleString()
     setTotalCases(totalCases)
 
     recovered = selCountryObj.cases.recovered;
-    // recovered = recovered.toLocaleString()
     setRecovered(recovered)
 
     deaths = selCountryObj.deaths.total;
-    // deaths = deaths.toLocaleString()
     setDeaths(deaths)
 
     // setting case details into the chartData
@@ -140,9 +137,9 @@ function App() {
       <Navbar selectedCountry={selectedCountry}/>
       <div className='CardWrapper'>
 
-        <CardBox TitleType={'Total Cases'} CaseDetails={totalCases.toLocaleString() || "638,610,555"} style="BgYellow"/>
-        <CardBox TitleType={'Total Recovered'} CaseDetails={recovered.toLocaleString() || "618,385,160"} style="BgGreen"/>
-        <CardBox TitleType={'Total Deaths'} CaseDetails={deaths.toLocaleString() || "6,608,627"} style="BgRed"/>
+        <CardBox TitleType={'Total Cases'} CaseDetails={totalCases || "638,610,555"} style="BgYellow"/>
+        <CardBox TitleType={'Total Recovered'} CaseDetails={recovered || "618,385,160"} style="BgGreen"/>
+        <CardBox TitleType={'Total Deaths'} CaseDetails={deaths || "6,608,627"} style="BgRed"/>
       </div>
 
       <div className='queryWrapper'>
